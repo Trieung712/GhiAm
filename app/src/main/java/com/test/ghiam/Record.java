@@ -100,7 +100,7 @@ public class Record extends AppCompatActivity {
     }
 
     private String generateUniqueFileName(File directory) {
-        String baseFileName = "testRecord";
+        String baseFileName = "Record";
         int count = 1;
 
         File newFile;

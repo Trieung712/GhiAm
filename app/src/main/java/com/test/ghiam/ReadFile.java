@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ReadFile extends AppCompatActivity {
     private Dialog popupDialog;
@@ -106,7 +108,7 @@ public class ReadFile extends AppCompatActivity {
         ArrayList<File> fileList = new ArrayList<>();
         File musicDirectory = new File(getExternalFilesDir(Environment.DIRECTORY_MUSIC).getPath());
 
-        // Lọc ra các file có định dạng .3gp
+
         File[] files = musicDirectory.listFiles();
         if (files != null) {
             for (File file : files) {
@@ -114,6 +116,11 @@ public class ReadFile extends AppCompatActivity {
                     fileList.add(file);
                 }
             }
+            Collections.sort(fileList, new Comparator<File>() {
+                public int compare(File f1, File f2) {
+                    return Long.compare(f2.lastModified(), f1.lastModified());
+                }
+            });
         }
         return fileList;
     }
